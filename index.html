@@ -1,30 +1,63 @@
-﻿<!DOCTYPE html>  <!-- 申明是哪个html版本 , h5只有这一种写法 -->
+---
+layout: default
+menu: home
+css: ['index.css', 'sidebar-popular-repo.css']
+---
+<section class="jumbotron">
+    <div class="container">
+        <h1>{{ site.title }}</h1>
+        <div id="jumbotron-meta-info">
+            <span class="meta-info">
+                <span class="octicon octicon-location"></span>
+                {{ site.location }}
+            </span>
+            <span class="meta-info hvr-grow">
+                <span class="octicon octicon-organization"></span>
+                <a href="{{ site.company_url }}" target="_blank">{{ site.company }}</a>
+            </span>
+            <span class="meta-info hvr-grow">
+                <span class="octicon octicon-mark-github"></span>
+                <a href="{{ site.github_url }}" target="_blank">@{{ site.name }}</a>
+            </span>
+        </div>
+    </div>
+</section>
+<section class="content container">
 
-<html>
+    <div class="row">
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">     <!-- 编码格式 -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- 适应移动端的模式 -->
-<meta name="apple-mobile-web-app-capable" content="yes" /> <!-- 是否启用 WebApp 全屏模式 -->
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<title>我们</title>
+        <!-- Post List -->
+        <div class="col-md-8">
 
-</head>
+            <ol class="post-list">
+                {% for post in paginator.posts %}
+                <li class="post-list-item">
+                    <h2 class="post-list-title">
+                        <a class="hvr-underline-from-center" href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
+                    </h2>
+                    <p class="post-list-description">
+                        {{ post.excerpt | strip_html | strip }}
+                    </p>
+                    <p class="post-list-meta">
+                        <span class="octicon octicon-calendar"></span> {{ post.date | date: "%Y/%m/%d" }}
+                    </p>
+                </li>
+                {% endfor %}
+            </ol>
 
+            <!-- Pagination -->
+            {% include pagination.html %}
 
-<body>
+            <!-- Comments -->
+            {% include disqus-comments.html %}
 
+        </div>
 
+        <div class="col-md-4">
+            {% include sidebar-popular-repo.html %}
+        </div>
 
-<h1>My First Heading</h1>
+    </div>
 
-<p>My first paragraph.</p>
+</section>
 
-<img src="/image/a1.jpg" width = "300px"  alt="上海鲜花港 - 郁金香" />
-
-<img src = "/image/a3.jpg" width = "300px" />
-
-
-</body>
-
-</html>
